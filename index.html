@@ -23,28 +23,28 @@
           </div>
         </div>
         <nav class="nav">
-          <button class="nav-item active" data-section="calendar">
+          <button class="nav-item active" data-view="view-calendar">
             <span class="nav-emoji">📅</span>
             <div>
               <p class="nav-title">Calendário</p>
               <p class="nav-subtitle">Agenda visual do mês</p>
             </div>
           </button>
-          <button class="nav-item" data-section="students">
+          <button class="nav-item" data-view="view-students">
             <span class="nav-emoji">🧑‍🎓</span>
             <div>
               <p class="nav-title">Alunos</p>
               <p class="nav-subtitle">Cadastro e planos</p>
             </div>
           </button>
-          <button class="nav-item" data-section="billing">
+          <button class="nav-item" data-view="view-billing">
             <span class="nav-emoji">💬</span>
             <div>
               <p class="nav-title">Cobrança</p>
               <p class="nav-subtitle">WhatsApp + Pix</p>
             </div>
           </button>
-          <button class="nav-item" data-section="tasks">
+          <button class="nav-item" data-view="view-tasks">
             <span class="nav-emoji">✅</span>
             <div>
               <p class="nav-title">Tarefas</p>
@@ -64,135 +64,148 @@
       </aside>
 
       <main class="main">
-        <header class="topbar">
-          <div>
-            <p class="eyebrow">Versão inicial (front-end)</p>
-            <h1>Central da professora</h1>
-            <p class="muted">
-              Organize sua rotina, acompanhe planos dos alunos e envie cobranças em um só lugar.
-            </p>
-          </div>
-          <div class="top-actions">
-            <button class="primary ghost" id="monthBack">Mês anterior</button>
-            <button class="primary" id="monthForward">Próximo mês</button>
-          </div>
-        </header>
-
-        <section class="grid stats" id="calendar">
-          <div class="card stat">
-            <div class="stat-icon confirmed">✔</div>
-            <div>
-              <p class="stat-label">Aulas confirmadas</p>
-              <p class="stat-value" id="statConfirmed">0</p>
-            </div>
-          </div>
-          <div class="card stat">
-            <div class="stat-icon pending">•</div>
-            <div>
-              <p class="stat-label">Pendentes</p>
-              <p class="stat-value" id="statPending">0</p>
-            </div>
-          </div>
-          <div class="card stat">
-            <div class="stat-icon canceled">✖</div>
-            <div>
-              <p class="stat-label">Canceladas</p>
-              <p class="stat-value" id="statCanceled">0</p>
-            </div>
-          </div>
-          <div class="card stat">
-            <div class="stat-icon students">★</div>
-            <div>
-              <p class="stat-label">Alunos ativos</p>
-              <p class="stat-value" id="statStudents">0</p>
-            </div>
-          </div>
-        </section>
-
-        <section class="card calendar-card">
-          <div class="section-header">
+        <section class="view active" id="view-calendar">
+          <header class="topbar">
             <div>
               <p class="eyebrow">Calendário</p>
-              <h2 id="monthTitle">Mês</h2>
-              <p class="muted">Clique em um dia para ver e editar os agendamentos.</p>
+              <h1>Central da professora</h1>
+              <p class="muted">
+                Organize sua agenda do mês, confirme/cancele aulas e registre observações por dia.
+              </p>
             </div>
-            <div class="legend">
-              <span class="badge confirmed">Confirmado</span>
-              <span class="badge pending">Pendente</span>
-              <span class="badge canceled">Cancelado</span>
+            <div class="top-actions">
+              <button class="primary ghost" id="monthBack">Mês anterior</button>
+              <button class="primary" id="monthForward">Próximo mês</button>
             </div>
-          </div>
+          </header>
 
-          <div class="calendar-grid" id="calendarGrid"></div>
+          <section class="grid stats" id="calendar">
+            <div class="card stat">
+              <div class="stat-icon confirmed">✔</div>
+              <div>
+                <p class="stat-label">Aulas confirmadas</p>
+                <p class="stat-value" id="statConfirmed">0</p>
+              </div>
+            </div>
+            <div class="card stat">
+              <div class="stat-icon pending">•</div>
+              <div>
+                <p class="stat-label">Pendentes</p>
+                <p class="stat-value" id="statPending">0</p>
+              </div>
+            </div>
+            <div class="card stat">
+              <div class="stat-icon canceled">✖</div>
+              <div>
+                <p class="stat-label">Canceladas</p>
+                <p class="stat-value" id="statCanceled">0</p>
+              </div>
+            </div>
+            <div class="card stat">
+              <div class="stat-icon students">★</div>
+              <div>
+                <p class="stat-label">Alunos ativos</p>
+                <p class="stat-value" id="statStudents">0</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="card calendar-card">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Calendário</p>
+                <h2 id="monthTitle">Mês</h2>
+                <p class="muted">Clique em um dia para ver e editar os agendamentos.</p>
+              </div>
+              <div class="legend">
+                <span class="badge confirmed">Confirmado</span>
+                <span class="badge pending">Pendente</span>
+                <span class="badge canceled">Cancelado</span>
+              </div>
+            </div>
+
+            <div class="calendar-grid" id="calendarGrid"></div>
+          </section>
+
+          <section class="grid columns">
+            <div class="card detail-card" id="dayDetails">
+              <div class="section-header">
+                <div>
+                  <p class="eyebrow">Dia selecionado</p>
+                  <h3 id="selectedDateTitle">Selecione um dia</h3>
+                  <p class="muted">
+                    Veja detalhes e registre novas aulas. Futuramente será integrado ao back-end.
+                  </p>
+                </div>
+              </div>
+              <div id="dayNotes"></div>
+
+              <form id="noteForm" class="form">
+                <div class="form-row">
+                  <label for="noteTitle">Anotação</label>
+                  <input
+                    type="text"
+                    id="noteTitle"
+                    name="noteTitle"
+                    placeholder="Ex.: Aula Matheus - 15h00"
+                    required
+                  />
+                </div>
+                <div class="form-row">
+                  <label for="noteStatus">Status</label>
+                  <select id="noteStatus" name="noteStatus">
+                    <option value="confirmed">Confirmado</option>
+                    <option value="pending">Pendente</option>
+                    <option value="canceled">Cancelado</option>
+                  </select>
+                </div>
+                <div class="form-row">
+                  <label for="noteInfo">Observações</label>
+                  <textarea
+                    id="noteInfo"
+                    name="noteInfo"
+                    rows="2"
+                    placeholder="Material, link da aula, reembolso etc."
+                  ></textarea>
+                </div>
+                <button class="primary" type="submit">Salvar anotação</button>
+              </form>
+            </div>
+          </section>
         </section>
 
-        <section class="grid columns">
-          <div class="card detail-card" id="dayDetails">
-            <div class="section-header">
-              <div>
-                <p class="eyebrow">Dia selecionado</p>
-                <h3 id="selectedDateTitle">Selecione um dia</h3>
-                <p class="muted">
-                  Veja detalhes e registre novas aulas. Futuramente será integrado ao back-end.
-                </p>
-              </div>
+        <section class="view" id="view-students">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">Alunos</p>
+              <h1>Planos e progresso</h1>
+              <p class="muted">Visualize contatos, responsáveis, planos e aulas restantes.</p>
             </div>
-            <div id="dayNotes"></div>
+          </header>
 
-            <form id="noteForm" class="form">
-              <div class="form-row">
-                <label for="noteTitle">Anotação</label>
-                <input
-                  type="text"
-                  id="noteTitle"
-                  name="noteTitle"
-                  placeholder="Ex.: Aula Matheus - 15h00"
-                  required
-                />
-              </div>
-              <div class="form-row">
-                <label for="noteStatus">Status</label>
-                <select id="noteStatus" name="noteStatus">
-                  <option value="confirmed">Confirmado</option>
-                  <option value="pending">Pendente</option>
-                  <option value="canceled">Cancelado</option>
-                </select>
-              </div>
-              <div class="form-row">
-                <label for="noteInfo">Observações</label>
-                <textarea
-                  id="noteInfo"
-                  name="noteInfo"
-                  rows="2"
-                  placeholder="Material, link da aula, reembolso etc."
-                ></textarea>
-              </div>
-              <button class="primary" type="submit">Salvar anotação</button>
-            </form>
-          </div>
-
-          <div class="card detail-card" id="students">
+          <section class="card detail-card">
             <div class="section-header">
               <div>
-                <p class="eyebrow">Alunos</p>
-                <h3>Planos e progresso</h3>
+                <p class="eyebrow">Lista de alunos</p>
+                <h3>Cadastro e status</h3>
                 <p class="muted">Ajuste rapidamente dados e acompanhe aulas restantes.</p>
               </div>
             </div>
             <div id="studentList" class="student-list"></div>
-          </div>
+          </section>
         </section>
 
-        <section class="grid columns">
-          <div class="card detail-card" id="billing">
-            <div class="section-header">
-              <div>
-                <p class="eyebrow">Cobrança</p>
-                <h3>Mensagem pronta para WhatsApp</h3>
-                <p class="muted">Personalize e copie em um clique.</p>
-              </div>
-              <button class="primary ghost" id="copyBilling">Copiar mensagem</button>
+        <section class="view" id="view-billing">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">Cobrança</p>
+              <h1>Mensagem pronta para WhatsApp</h1>
+              <p class="muted">Personalize e copie em um clique para enviar via WhatsApp.</p>
             </div>
+            <button class="primary ghost" id="copyBilling">Copiar mensagem</button>
+          </header>
+
+          <section class="card detail-card" id="billing">
             <form class="form billing-form" id="billingForm">
               <div class="form-row">
                 <label for="billingStudent">Aluno</label>
@@ -227,21 +240,24 @@
               </div>
             </form>
             <div class="billing-preview" id="billingPreview"></div>
-          </div>
+          </section>
+        </section>
 
-          <div class="card detail-card" id="tasks">
-            <div class="section-header">
-              <div>
-                <p class="eyebrow">Tarefas</p>
-                <h3>Planejamento rápido</h3>
-                <p class="muted">
-                  Use para lembrar materiais, conteúdos de aula e pendências administrativas.
-                </p>
-              </div>
-              <button class="primary ghost" id="addTask">Nova tarefa</button>
+        <section class="view" id="view-tasks">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">Tarefas</p>
+              <h1>Planejamento rápido</h1>
+              <p class="muted">
+                Use para lembrar materiais, conteúdos de aula e pendências administrativas.
+              </p>
             </div>
+            <button class="primary ghost" id="addTask">Nova tarefa</button>
+          </header>
+
+          <section class="card detail-card" id="tasks">
             <div class="task-list" id="taskList"></div>
-          </div>
+          </section>
         </section>
       </main>
     </div>

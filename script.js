@@ -373,10 +373,7 @@ function attachNavigation() {
   const navButtons = document.querySelectorAll(".nav-item");
   navButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      navButtons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      const section = document.getElementById(btn.dataset.section);
-      if (section) section.scrollIntoView({ behavior: "smooth" });
+      showView(btn.dataset.view);
     });
   });
 }
@@ -442,6 +439,17 @@ function init() {
   renderCalendar();
   renderTasks();
   renderBillingPreview();
+  showView("view-calendar");
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
+function showView(viewId) {
+  document.querySelectorAll(".view").forEach((view) => {
+    view.classList.toggle("active", view.id === viewId);
+  });
+  document.querySelectorAll(".nav-item").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.view === viewId);
+  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}

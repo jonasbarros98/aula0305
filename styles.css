@@ -163,6 +163,16 @@ p {
   gap: 18px;
 }
 
+.view {
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.view.active {
+  display: flex;
+}
+
 .topbar {
   display: flex;
   justify-content: space-between;
